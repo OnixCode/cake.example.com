@@ -27,6 +27,7 @@ use Cake\Event\Event;
  */
 class AppController extends Controller
 {
+    protected $session;
 
     /**
      * Initialization hook method.
@@ -41,6 +42,8 @@ class AppController extends Controller
     {
         parent::initialize();
 
+        $this->loadComponent('Auth');
+
         $this->loadComponent('RequestHandler', [
             'enableBeforeRedirect' => false,
         ]);
@@ -51,5 +54,12 @@ class AppController extends Controller
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
          */
         //$this->loadComponent('Security');
+
+        $this->session = $this->getRequest()->getSession();
+        $this->Auth->deny();
+
+        $this->set('session', $this->session->read('Auth.User'));
+
+
     }
 }
