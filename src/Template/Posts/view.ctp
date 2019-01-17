@@ -13,6 +13,7 @@
         <li><?= $this->Html->link(__('New Post'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('Comment'), ['controller' => 'Comments', 'action' => 'add', $post->id]) ?> </li>
     </ul>
 </nav>
 <div class="posts view large-9 medium-8 columns content">
@@ -54,5 +55,17 @@
     <div class="row">
         <h4><?= __('Body') ?></h4>
         <?= $this->Text->autoParagraph(h($post->body)); ?>
+    </div>
+
+    <div class="row">
+        <h4><?= __('Comments') ?></h4>
+        <?php foreach($comments as $comment): ?>
+            <h5><?= $comment->title ?></h5>
+            <div>
+                <img src="https://www.gravatar/avatar<?= md5($comment->email); ?>">
+                <?= $comment->body ?>
+                </div>
+                <hr>
+        <?php endforeach; ?>
     </div>
 </div>
